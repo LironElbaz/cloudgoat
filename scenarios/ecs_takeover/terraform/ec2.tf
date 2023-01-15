@@ -24,7 +24,10 @@ resource "aws_instance" "vulnsite" {
   subnet_id                   = aws_subnet.public.id
 
   tags = {
-    "Name" = "cg-${var.scenario-name}-${var.cgid}-vulnsite"
+    "Name"    = "cg-${var.scenario-name}-${var.cgid}-vulnsite"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -38,6 +41,9 @@ resource "aws_instance" "vault" {
   subnet_id                   = aws_subnet.public.id
 
   tags = {
-    "Name" = "cg-${var.scenario-name}-${var.cgid}-vault"
+    "Name"    = "cg-${var.scenario-name}-${var.cgid}-vault"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }

@@ -2,9 +2,12 @@
 resource "aws_iam_user" "cg-raynor" {
   name = "raynor-${var.cgid}"
   tags = {
-    Name     = "cg-raynor-${var.cgid}"
-    Stack    = "${var.stack-name}"
-    Scenario = "${var.scenario-name}"
+    Name      = "cg-raynor-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -17,6 +20,11 @@ resource "aws_iam_policy" "cg-raynor-policy" {
   name        = "cg-raynor-policy-${var.cgid}"
   description = "cg-raynor-policy"
   policy      = "${file("../assets/policies/v1.json")}"
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 #IAM Policy Attachments

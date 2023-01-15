@@ -2,7 +2,7 @@
 ###########  EC2 Roles ###############
 
 resource "aws_iam_role" "cg-ec2-ruse-role" {
-  name = "cg-ec2-role-${var.cgid}"
+  name               = "cg-ec2-role-${var.cgid}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -19,9 +19,12 @@ resource "aws_iam_role" "cg-ec2-ruse-role" {
 }
 EOF
   tags = {
-      Name = "cg-ec2-role-${var.cgid}"
-      Stack = "${var.stack-name}"
-      Scenario = "${var.scenario-name}"
+    Name      = "cg-ec2-role-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -29,7 +32,7 @@ EOF
 #IAM Admin Role
 
 resource "aws_iam_role" "cg-efs-admin-role" {
-  name = "cg-efs-admin-role-${var.cgid}"
+  name               = "cg-efs-admin-role-${var.cgid}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -46,9 +49,12 @@ resource "aws_iam_role" "cg-efs-admin-role" {
 }
 EOF
   tags = {
-      Name = "cg-ec2-efsUser-role-${var.cgid}"
-      Stack = "${var.stack-name}"
-      Scenario = "${var.scenario-name}"
+    Name      = "cg-ec2-efsUser-role-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -72,13 +78,18 @@ resource "aws_iam_role" "cg-lambda-role" {
   ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 #Iam Role Policy for ec2 "ruse-box"
 resource "aws_iam_policy" "cg-ec2-ruse-role-policy" {
-  name = "cg-ec2-ruse-role-policy-${var.cgid}"
+  name        = "cg-ec2-ruse-role-policy-${var.cgid}"
   description = "cg-ec2-ruse-role-policy-${var.cgid}"
-  policy = <<POLICY
+  policy      = <<POLICY
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -104,12 +115,17 @@ resource "aws_iam_policy" "cg-ec2-ruse-role-policy" {
     ]
 }
 POLICY
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 resource "aws_iam_policy" "cg-efs-admin-role-policy" {
-  name = "cg-efs-admin-role-policy-${var.cgid}"
+  name        = "cg-efs-admin-role-policy-${var.cgid}"
   description = "cg-efs-admin-role-policy-${var.cgid}"
-  policy = <<POLICY
+  policy      = <<POLICY
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -124,6 +140,11 @@ resource "aws_iam_policy" "cg-efs-admin-role-policy" {
     ]
 }
 POLICY
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
@@ -133,7 +154,7 @@ POLICY
 
 #IAM Role
 resource "aws_iam_role" "cg-ecs-role" {
-  name = "cg-ecs-role-${var.cgid}"
+  name               = "cg-ecs-role-${var.cgid}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -150,16 +171,19 @@ resource "aws_iam_role" "cg-ecs-role" {
 }
 EOF
   tags = {
-      Name = "cg-ecs-role-${var.cgid}"
-      Stack = "${var.stack-name}"
-      Scenario = "${var.scenario-name}"
+    Name      = "cg-ecs-role-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 #Iam Role Policy
 resource "aws_iam_policy" "cg-ecs-role-policy" {
-  name = "cg-ecs-role-policy-${var.cgid}"
+  name        = "cg-ecs-role-policy-${var.cgid}"
   description = "cg-ecs-role-policy-${var.cgid}"
-  policy = <<POLICY
+  policy      = <<POLICY
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -195,6 +219,11 @@ resource "aws_iam_policy" "cg-ecs-role-policy" {
     ]
 }
 POLICY
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
