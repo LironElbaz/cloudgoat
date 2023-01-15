@@ -16,6 +16,11 @@ data "aws_ami" "ubuntu" {
 resource "aws_network_interface" "dev" {
   subnet_id   = module.vpc.private_subnets[0]
   private_ips = ["10.0.1.10"]
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_role" "dev-instance" {
   name = "dev-instance-role"
@@ -36,6 +41,11 @@ resource "aws_iam_role" "dev-instance" {
     ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_role_policy_attachment" "dev-instance-policy" {
   role       = aws_iam_role.dev-instance.name
@@ -44,6 +54,11 @@ resource "aws_iam_role_policy_attachment" "dev-instance-policy" {
 resource "aws_iam_instance_profile" "dev" {
   name = "dev-instance-profile"
   role = aws_iam_role.dev-instance.name
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "tls_private_key" "ssh_key" {
   algorithm = "RSA"
@@ -58,12 +73,20 @@ resource "aws_instance" "dev" {
   tags = {
     Name        = "dev-instance",
     Environment = "dev"
+    git_org     = "LironElbaz"
+    git_repo    = "cloudgoat"
+    yor_trace   = "yor_trace"
   }
 }
 
 # IAM user
 resource "aws_iam_user" "readonly_user" {
   name = local.repo_readonly_username
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_user_ssh_key" "readonly_user" {
   username   = aws_iam_user.readonly_user.name

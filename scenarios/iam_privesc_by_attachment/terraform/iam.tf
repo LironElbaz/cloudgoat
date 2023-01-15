@@ -2,9 +2,12 @@
 resource "aws_iam_user" "cg-kerrigan" {
   name = "kerrigan"
   tags = {
-    Name = "cg-kerrigan-${var.cgid}"
-    Stack = "${var.stack-name}"
-    Scenario = "${var.scenario-name}"
+    Name      = "cg-kerrigan-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 resource "aws_iam_access_key" "cg-kerrigan" {
@@ -12,9 +15,9 @@ resource "aws_iam_access_key" "cg-kerrigan" {
 }
 #IAM User Policies
 resource "aws_iam_policy" "cg-kerrigan-policy" {
-  name = "cg-kerrigan-policy"
+  name        = "cg-kerrigan-policy"
   description = "cg-kerrigan-policy"
-  policy = <<EOF
+  policy      = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -50,14 +53,19 @@ resource "aws_iam_policy" "cg-kerrigan-policy" {
     ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_user_policy_attachment" "cg-kerrigan-attachment" {
-  user = "${aws_iam_user.cg-kerrigan.name}"
+  user       = "${aws_iam_user.cg-kerrigan.name}"
   policy_arn = "${aws_iam_policy.cg-kerrigan-policy.arn}"
 }
 # IAM Role for EC2 Mighty
 resource "aws_iam_role" "cg-ec2-mighty-role" {
-  name = "cg-ec2-mighty-role-${var.cgid}"
+  name               = "cg-ec2-mighty-role-${var.cgid}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -73,14 +81,17 @@ resource "aws_iam_role" "cg-ec2-mighty-role" {
 }
 EOF
   tags = {
-      Name = "CloudGoat ${var.cgid} EC2 Mighty Role"
-      Stack = "${var.stack-name}"
-      Scenario = "${var.scenario-name}"
+    Name      = "CloudGoat ${var.cgid} EC2 Mighty Role"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 # IAM Role for EC2 Meek
 resource "aws_iam_role" "cg-ec2-meek-role" {
-  name = "cg-ec2-meek-role-${var.cgid}"
+  name               = "cg-ec2-meek-role-${var.cgid}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -96,16 +107,19 @@ resource "aws_iam_role" "cg-ec2-meek-role" {
 }
 EOF
   tags = {
-      Name = "CloudGoat ${var.cgid} EC2 Meek Role"
-      Stack = "${var.stack-name}"
-      Scenario = "${var.scenario-name}"
+    Name      = "CloudGoat ${var.cgid} EC2 Meek Role"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 #IAM Policy for EC2 Mighty
 resource "aws_iam_policy" "cg-ec2-mighty-policy" {
-  name = "cg-ec2-mighty-policy"
+  name        = "cg-ec2-mighty-policy"
   description = "cg-ec2-mighty-policy"
-  policy =  <<EOF
+  policy      = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -119,12 +133,17 @@ resource "aws_iam_policy" "cg-ec2-mighty-policy" {
   ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 #IAM Policy for EC2 meek
 resource "aws_iam_policy" "cg-ec2-meek-policy" {
-  name = "cg-ec2-meek-policy"
+  name        = "cg-ec2-meek-policy"
   description = "cg-ec2-meek-policy"
-  policy =  <<EOF
+  policy      = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -138,19 +157,29 @@ resource "aws_iam_policy" "cg-ec2-meek-policy" {
   ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 #IAM Role Policy Attachment for EC2 Mighty
 resource "aws_iam_role_policy_attachment" "cg-ec2-mighty-role-policy-attachment-ec2" {
-  role = "${aws_iam_role.cg-ec2-mighty-role.name}"
+  role       = "${aws_iam_role.cg-ec2-mighty-role.name}"
   policy_arn = "${aws_iam_policy.cg-ec2-mighty-policy.arn}"
 }
 #IAM Role Policy Attachment for EC2 Meek
 resource "aws_iam_role_policy_attachment" "cg-ec2-meek-role-policy-attachment-ec2" {
-  role = "${aws_iam_role.cg-ec2-meek-role.name}"
+  role       = "${aws_iam_role.cg-ec2-meek-role.name}"
   policy_arn = "${aws_iam_policy.cg-ec2-meek-policy.arn}"
 }
 #IAM Instance Profile for Meek EC2 instances
 resource "aws_iam_instance_profile" "cg-ec2-meek-instance-profile" {
   name = "cg-ec2-meek-instance-profile-${var.cgid}"
-  role="${aws_iam_role.cg-ec2-meek-role.name}"
+  role = "${aws_iam_role.cg-ec2-meek-role.name}"
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }

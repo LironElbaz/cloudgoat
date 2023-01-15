@@ -4,7 +4,10 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    "Name" = "cg-${var.scenario-name}-${var.cgid}-main"
+    "Name"    = "cg-${var.scenario-name}-${var.cgid}-main"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -12,7 +15,10 @@ resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    "Name" = "cg-${var.scenario-name}-${var.cgid}-main"
+    "Name"    = "cg-${var.scenario-name}-${var.cgid}-main"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -22,7 +28,10 @@ resource "aws_subnet" "public" {
   cidr_block        = "10.0.1.0/24"
 
   tags = {
-    "Name" = "cg-${var.scenario-name}-${var.cgid}-public"
+    "Name"    = "cg-${var.scenario-name}-${var.cgid}-public"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -35,7 +44,10 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    "Name" = "cg-${var.scenario-name}-${var.cgid}-public"
+    "Name"    = "cg-${var.scenario-name}-${var.cgid}-public"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 
@@ -70,6 +82,9 @@ resource "aws_security_group" "ecs_sg" {
   }
 
   tags = {
-    "Name" = "cg-${var.scenario-name}-${var.cgid}-ecs-sg"
+    "Name"    = "cg-${var.scenario-name}-${var.cgid}-ecs-sg"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
