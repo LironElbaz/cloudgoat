@@ -1,5 +1,10 @@
 resource "aws_codecommit_repository" "code" {
   repository_name = local.repository_name
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 locals {
@@ -22,11 +27,11 @@ resource "null_resource" "upload_files" {
     on_failure  = fail
     interpreter = ["bash", "-c"]
     environment = {
-      AWS_REGION = var.region,
+      AWS_REGION         = var.region,
       AWS_DEFAULT_REGION = var.region
     }
-    
-    command     = <<BASH
+
+    command = <<BASH
     set -e
     cat > "${local.src_path}/buildspec.old.yml" <<EOF
       ${local.vulnerable_file_content}
@@ -54,5 +59,10 @@ BASH
 resource "aws_ecr_repository" "app" {
   name                 = local.ecr_repository_name
   image_tag_mutability = "MUTABLE"
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 

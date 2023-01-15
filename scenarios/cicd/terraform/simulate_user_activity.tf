@@ -16,6 +16,11 @@ resource "aws_iam_role" "simulate-user-activity-scheduling" {
   ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 resource "aws_iam_role_policy" "simulate-user-activity-scheduling" {
@@ -41,6 +46,11 @@ resource "aws_cloudwatch_event_rule" "schedule" {
   name                = "simulated-user-activity"
   description         = "Simulate user activity on the API"
   schedule_expression = "rate(1 minute)"
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_cloudwatch_event_target" "codebuild" {
   target_id = "trigger-codebuild"
@@ -82,6 +92,11 @@ resource "aws_codebuild_project" "simulate-user-activity" {
     type      = "NO_SOURCE"
     buildspec = file("${path.module}/../assets/simulated-user-activity/buildspec.yml")
   }
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
@@ -102,6 +117,11 @@ resource "aws_iam_role" "simulate-user-activity" {
   ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_role_policy" "simulate-user-activity" {
   role = aws_iam_role.simulate-user-activity.name
