@@ -1,9 +1,12 @@
 resource "aws_iam_user" "cg-calrissian" {
   name = "calrissian"
   tags = {
-    Name = "cg-calrissian-${var.cgid}"
-    Stack = "${var.stack-name}"
-    Scenario = "${var.scenario-name}"
+    Name      = "cg-calrissian-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 resource "aws_iam_access_key" "cg-calrissian" {
@@ -12,9 +15,12 @@ resource "aws_iam_access_key" "cg-calrissian" {
 resource "aws_iam_user" "cg-solo" {
   name = "solo"
   tags = {
-    Name = "cg-solo-${var.cgid}"
-    Stack = "${var.stack-name}"
-    Scenario = "${var.scenario-name}"
+    Name      = "cg-solo-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }
 resource "aws_iam_access_key" "cg-solo" {
@@ -22,9 +28,9 @@ resource "aws_iam_access_key" "cg-solo" {
 }
 #IAM User Policies
 resource "aws_iam_policy" "cg-calrissian-policy" {
-  name = "cg-calrissian-policy-${var.cgid}"
+  name        = "cg-calrissian-policy-${var.cgid}"
   description = "cg-calrissian-policy-${var.cgid}"
-  policy = <<EOF
+  policy      = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -51,11 +57,16 @@ resource "aws_iam_policy" "cg-calrissian-policy" {
     ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_policy" "cg-solo-policy" {
-  name = "cg-solo-policy-${var.cgid}"
+  name        = "cg-solo-policy-${var.cgid}"
   description = "cg-solo-policy-${var.cgid}"
-  policy = <<EOF
+  policy      = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -79,13 +90,18 @@ resource "aws_iam_policy" "cg-solo-policy" {
     ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 #User Policy Attachments
 resource "aws_iam_user_policy_attachment" "cg-calrissian-attachment" {
-  user = "${aws_iam_user.cg-calrissian.name}"
+  user       = "${aws_iam_user.cg-calrissian.name}"
   policy_arn = "${aws_iam_policy.cg-calrissian-policy.arn}"
 }
 resource "aws_iam_user_policy_attachment" "cg-solo-attachment" {
-  user = "${aws_iam_user.cg-solo.name}"
+  user       = "${aws_iam_user.cg-solo.name}"
   policy_arn = "${aws_iam_policy.cg-solo-policy.arn}"
 }

@@ -7,23 +7,29 @@ locals {
 }
 
 resource "aws_s3_bucket" "cg-secret-s3-bucket" {
-  bucket = "cg-secret-s3-bucket-${local.bucket_suffix}"
-  acl = "private"
+  bucket        = "cg-secret-s3-bucket-${local.bucket_suffix}"
+  acl           = "private"
   force_destroy = true
   tags = {
-      Name = "cg-secret-s3-bucket-${local.bucket_suffix}"
-      Description = "CloudGoat ${var.cgid} S3 Bucket used for storing a secret"
-      Stack = "${var.stack-name}"
-      Scenario = "${var.scenario-name}"
+    Name        = "cg-secret-s3-bucket-${local.bucket_suffix}"
+    Description = "CloudGoat ${var.cgid} S3 Bucket used for storing a secret"
+    Stack       = "${var.stack-name}"
+    Scenario    = "${var.scenario-name}"
+    git_org     = "LironElbaz"
+    git_repo    = "cloudgoat"
+    yor_trace   = "yor_trace"
   }
 }
 resource "aws_s3_bucket_object" "cg-shepards-credentials" {
   bucket = "${aws_s3_bucket.cg-secret-s3-bucket.id}"
-  key = "admin-user.txt"
+  key    = "admin-user.txt"
   source = "../assets/admin-user.txt"
   tags = {
-    Name = "cg-shepards-credentials-${var.cgid}"
-    Stack = "${var.stack-name}"
-    Scenario = "${var.scenario-name}"
+    Name      = "cg-shepards-credentials-${var.cgid}"
+    Stack     = "${var.stack-name}"
+    Scenario  = "${var.scenario-name}"
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }

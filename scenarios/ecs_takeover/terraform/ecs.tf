@@ -1,5 +1,10 @@
 resource "aws_ecs_cluster" "ecs_cluster" {
   name = "${var.scenario-name}-${var.cgid}-cluster"
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 resource "aws_ecs_task_definition" "vault" {
@@ -21,6 +26,11 @@ resource "aws_ecs_task_definition" "vault" {
       ]
     }
   ])
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 // Hosts the role we want to use to force rescheduling
@@ -37,6 +47,11 @@ resource "aws_ecs_task_definition" "privd" {
       command   = ["sleep", "365d"]
     }
   ])
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 // Hosts website to container escape
@@ -72,6 +87,11 @@ resource "aws_ecs_task_definition" "vulnsite" {
     name      = "docker-socket"
     host_path = "/var/run/docker.sock"
   }
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
@@ -85,6 +105,11 @@ resource "aws_ecs_service" "vulnsite" {
     type       = "memberOf"
     expression = "ec2InstanceId == ${aws_instance.vulnsite.id}"
   }
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 resource "aws_ecs_service" "privd" {
@@ -94,6 +119,11 @@ resource "aws_ecs_service" "privd" {
   force_new_deployment = true
   scheduling_strategy  = "DAEMON"
   desired_count        = 2
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
@@ -127,5 +157,10 @@ resource "aws_ecs_service" "vault" {
       AWS_DEFAULT_REGION = var.region
       AWS_PROFILE        = var.profile
     }
+  }
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
   }
 }

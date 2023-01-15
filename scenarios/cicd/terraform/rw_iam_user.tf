@@ -1,5 +1,10 @@
 resource "aws_iam_user" "developer" {
   name = local.repo_readwrite_username
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_user_policy" "developer" {
   name = "developer-policy"
