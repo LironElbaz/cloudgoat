@@ -1,5 +1,10 @@
 resource "aws_iam_user" "initial" {
   name = local.initial_username
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 resource "aws_iam_user_policy" "initial" {
   name = "initial-policy"

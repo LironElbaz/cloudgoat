@@ -15,6 +15,11 @@ data "aws_iam_policy_document" "ecs_agent" {
 resource "aws_iam_role" "ecs_agent" {
   name               = "cg-${var.scenario-name}-${var.cgid}-ecs-agent"
   assume_role_policy = data.aws_iam_policy_document.ecs_agent.json
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
@@ -26,6 +31,11 @@ resource "aws_iam_role_policy_attachment" "ecs_agent" {
 resource "aws_iam_instance_profile" "ecs_agent" {
   name = "cg-${var.scenario-name}-${var.cgid}-ecs-agent"
   role = aws_iam_role.ecs_agent.name
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
@@ -51,6 +61,11 @@ resource "aws_iam_role" "privd" {
   name                = "cg-${var.scenario-name}-${var.cgid}-privd"
   assume_role_policy  = data.aws_iam_policy_document.ecs_tasks_role.json
   managed_policy_arns = [aws_iam_policy.privd.arn]
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 // Give the role read access to ecs and IAM permissions.
@@ -81,4 +96,9 @@ resource "aws_iam_policy" "privd" {
       },
     ]
   })
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
