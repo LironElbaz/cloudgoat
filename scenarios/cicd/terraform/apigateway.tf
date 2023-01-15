@@ -1,6 +1,11 @@
 resource "aws_apigatewayv2_api" "apigw" {
   name          = local.api_gateway_name
   protocol_type = "HTTP"
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 resource "aws_apigatewayv2_integration" "lambda" {
@@ -39,4 +44,9 @@ resource "aws_apigatewayv2_stage" "prod" {
   api_id        = aws_apigatewayv2_api.apigw.id
   deployment_id = aws_apigatewayv2_deployment.example.id
   name          = "prod"
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }

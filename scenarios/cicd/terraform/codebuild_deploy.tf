@@ -27,6 +27,11 @@ resource "aws_codebuild_project" "deploy-lambda" {
     type      = "NO_SOURCE"
     buildspec = file("${path.module}/../assets/cd-pipeline/buildspec.yml")
   }
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 
@@ -47,6 +52,11 @@ resource "aws_iam_role" "deploy-lambda" {
   ]
 }
 EOF
+  tags = {
+    git_org   = "LironElbaz"
+    git_repo  = "cloudgoat"
+    yor_trace = "yor_trace"
+  }
 }
 
 resource "aws_iam_role_policy" "deploy-lambda" {
